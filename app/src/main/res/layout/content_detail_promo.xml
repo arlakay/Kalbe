@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:src="@drawable/ic_account_circle_black_24dp"
+                    android:padding="@dimen/activity_horizontal_margin"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
+
+                <TextView
+                    android:id="@+id/txt_detail_place_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:text="Place"/>
+
+                <TextView
+                    android:id="@+id/txt_detail_street_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Description"
+                    android:ellipsize="end"
+                    android:maxLines="1"/>
+
+                <TextView
+                    android:id="@+id/txt_detail_diskon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Discount 10%"
+                    android:textColor="@color/white"
+                    android:background="@color/black"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin_purchase_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right">
+
+            <Button
+                android:id="@+id/btn_detail_purchase"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="Purchase"
+                android:textColor="@color/white"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorPrimary"
+                style="@style/Base.Widget.AppCompat.Button.Small"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <include layout="@layout/content_detail_promo_infobar" />
+
+</LinearLayout>

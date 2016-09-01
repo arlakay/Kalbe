@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="id.co.octolink" >
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:resizeable="true" />
+
+    <application
+        android:name=".singleton.AppController"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_kalbe"
+        android:label="Kalbe Family Reward"
+        android:largeHeap="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+
+        <activity
+            android:name=".Splash"
+            android:label="Kalbe Family Reward"
+            android:noHistory="true"
+            android:theme="@style/AppThemeNoBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".loyaltysystem.mainmenu.Main2Activity" >
+        </activity>
+        <activity
+            android:name=".loyaltysystem.purchase.scan.BarcodeScanner"
+            android:label="@string/scan"
+            android:noHistory="true"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".loyaltysystem.login.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppThemeNoBar"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".loyaltysystem.register.Register"
+            android:label="@string/register"
+            android:theme="@style/AppThemeNoBar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".loyaltysystem.purchase.confirm.DiscountPage"
+            android:noHistory="true" />
+        <activity
+            android:name=".loyaltysystem.history.detail.StrukDetailHistory"
+            android:noHistory="true" />
+        <activity
+            android:name=".loyaltysystem.merchant.category.CategoryPromo2"
+            android:label="Category Promo" />
+        <activity
+            android:name=".loyaltysystem.mainmenu.navdrawer.ProfileActivity" >
+        </activity>
+        <activity
+            android:name=".loyaltysystem.merchant.list.Merchant2Activity" >
+        </activity>
+        <activity
+            android:name=".loyaltysystem.merchant.detail.MerchantDetail" >
+        </activity>
+        <activity
+            android:name=".loyaltysystem.history.list.History2Activity"
+            android:label=" ">
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <service android:name=".service.GeofenceTransitionsIntentService" />
+
+    </application>
+
+</manifest>
