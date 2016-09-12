@@ -57,8 +57,8 @@
 
                 <ImageButton
                     android:id="@+id/btn_home_deco"
-                    android:layout_width="144dp"
-                    android:layout_height="144dp"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
                     android:layout_weight="1"
                     android:background="@null"
                     android:src="@drawable/architecture"
@@ -70,6 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textSize="15dp"
                     android:text="Home Deco"
                     android:textColor="@color/black"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -86,8 +87,8 @@
 
                 <ImageButton
                     android:id="@+id/btn_automotive"
-                    android:layout_width="144dp"
-                    android:layout_height="144dp"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
                     android:layout_weight="1"
                     android:background="@null"
                     android:src="@drawable/automotive"
@@ -100,6 +101,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Automotive"
+                    android:textSize="15dp"
                     android:textColor="@color/black"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:gravity="center_horizontal" />
@@ -122,8 +124,8 @@
 
                 <ImageButton
                     android:id="@+id/btn_food_drinks"
-                    android:layout_width="144dp"
-                    android:layout_height="144dp"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
                     android:layout_weight="1"
                     android:background="@null"
                     android:src="@drawable/fnb"
@@ -137,6 +139,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textSize="15dp"
                     android:text="Food &amp; Drinks"
                     android:textColor="@color/black"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -155,8 +158,8 @@
 
                 <ImageButton
                     android:id="@+id/btn_health"
-                    android:layout_width="144dp"
-                    android:layout_height="144dp"
+                    android:layout_width="1200dp"
+                    android:layout_height="120dp"
                     android:layout_weight="1"
                     android:background="@null"
                     android:src="@drawable/health"
@@ -171,6 +174,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Health"
+                    android:textSize="15dp"
                     android:textColor="@color/black"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:gravity="center_horizontal"
@@ -196,8 +200,8 @@
 
                 <ImageButton
                     android:id="@+id/btn_leisure"
-                    android:layout_width="144dp"
-                    android:layout_height="144dp"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
                     android:layout_weight="1"
                     android:background="@null"
                     android:src="@drawable/leisure"
@@ -212,6 +216,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Leisure"
+                    android:textSize="15dp"
                     android:textColor="@color/black"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:gravity="center_horizontal"
@@ -229,11 +234,11 @@
 
                 <ImageButton
                     android:id="@+id/btn_sports"
-                    android:layout_width="144dp"
-                    android:layout_height="144dp"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:src="@drawable/sports"
+                    android:src="@drawable/sport"
                     android:scaleType="fitCenter"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="16dp"
@@ -245,6 +250,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Sports"
+                    android:textSize="15dp"
                     android:textColor="@color/black"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:gravity="center_horizontal"

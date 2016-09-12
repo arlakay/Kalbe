@@ -8,6 +8,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
 
     <supports-screens
         android:anyDensity="true"
@@ -21,7 +25,6 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-
         <activity
             android:name=".Splash"
             android:label="Kalbe Family Reward"
@@ -33,8 +36,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".loyaltysystem.mainmenu.Main2Activity" >
+        <activity android:name=".loyaltysystem.mainmenu.Main2Activity" >
         </activity>
         <activity
             android:name=".loyaltysystem.purchase.scan.BarcodeScanner"
@@ -60,18 +62,21 @@
         <activity
             android:name=".loyaltysystem.merchant.category.CategoryPromo2"
             android:label="Category Promo" />
-        <activity
-            android:name=".loyaltysystem.mainmenu.navdrawer.ProfileActivity" >
+        <activity android:name=".loyaltysystem.mainmenu.navdrawer.ProfileActivity" >
         </activity>
         <activity
-            android:name=".loyaltysystem.merchant.list.Merchant2Activity" >
+            android:name=".loyaltysystem.merchant.list.Merchant2Activity"
+            android:label=" "
+            android:noHistory="true" >
         </activity>
         <activity
-            android:name=".loyaltysystem.merchant.detail.MerchantDetail" >
+            android:name=".loyaltysystem.merchant.detail.MerchantDetail"
+            android:label="Kalbe Family Reward"
+            android:noHistory="true" >
         </activity>
         <activity
             android:name=".loyaltysystem.history.list.History2Activity"
-            android:label=" ">
+            android:label=" " >
         </activity>
 
         <meta-data
@@ -80,6 +85,9 @@
 
         <service android:name=".service.GeofenceTransitionsIntentService" />
 
+        <activity android:name=".loyaltysystem.struk.StrukActivity"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

@@ -21,6 +21,7 @@ import net.sourceforge.zbar.SymbolSet;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.co.octolink.R;
+import id.co.octolink.loyaltysystem.mainmenu.Main2Activity;
 import id.co.octolink.loyaltysystem.purchase.confirm.DiscountPage;
 
 /**
@@ -29,8 +30,9 @@ import id.co.octolink.loyaltysystem.purchase.confirm.DiscountPage;
 @SuppressWarnings("ALL")
 
 public class BarcodeScanner extends AppCompatActivity {
-    @BindView(R.id.toolbar)Toolbar toolbar;
+    //@BindView(R.id.toolbar)Toolbar toolbar;
 
+    Toolbar toolbar;
     private Camera mCamera;
     private CameraPreview mPreview;
     private Handler autoFocusHandler;
@@ -51,33 +53,44 @@ public class BarcodeScanner extends AppCompatActivity {
         setContentView(R.layout.barcode_scanner);
         ButterKnife.bind(this);
 
-        setupToolbar();
-
+        //setupToolbar();
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
         initControls();
     }
 
     private void setupToolbar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
 
-        if (getSupportActionBar() == null) {
-            throw new IllegalStateException("Activity must implement toolbar");
-        }
+//        if (getSupportActionBar() == null) {
+//            throw new IllegalStateException("Activity must implement toolbar");
+//        }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == android.R.id.home){
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//        if (id == android.R.id.home){
+//            finish();
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
+
+
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(BarcodeScanner.this, Main2Activity.class);
+        startActivityForResult(myIntent, 0);
+        return true;
+
     }
-
-
     private void initControls() {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 

@@ -50,6 +50,7 @@ import id.co.octolink.loyaltysystem.login.LoginActivity;
 import id.co.octolink.loyaltysystem.mainmenu.navdrawer.ProfileActivity;
 import id.co.octolink.loyaltysystem.merchant.category.CategoryPromo2;
 import id.co.octolink.loyaltysystem.purchase.scan.BarcodeScanner;
+import id.co.octolink.loyaltysystem.struk.StrukActivity;
 import id.co.octolink.service.GeofenceErrorMessages;
 import id.co.octolink.service.GeofenceTransitionsIntentService;
 import id.co.octolink.singleton.AppController;
@@ -190,6 +191,18 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         }
     }
 
+    @OnClick(R.id.redeem)
+    public void redeem(View view) {
+        isInternetPresent = cd.isConnectingToInternet();
+        if (isInternetPresent) {
+            Intent intent = new Intent(Main2Activity.this, StrukActivity.class);
+            intent.putExtra("cid", cid);
+            startActivity(intent);
+        } else {
+            showAlertDialog(Main2Activity.this, "No Internet Connection",
+                    "You don't have internet connection.", false);
+        }
+    }
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        MenuInflater inflater = getMenuInflater();

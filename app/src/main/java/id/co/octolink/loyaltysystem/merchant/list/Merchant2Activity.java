@@ -108,6 +108,7 @@ public class Merchant2Activity extends AppCompatActivity {
                     public void onItemClick(Merchant model) {
 //                        int jobId = model.getJob_id();
                         String namaMerchant =  model.getMerchant_name();
+                        String addressMerchant =  model.getCity();
 //                        String startTime = model.getStart_time();
 //                        String finishTime = model.getFinish_time();
 //                        String terminalCode = model.getTerminal_code();
@@ -120,6 +121,7 @@ public class Merchant2Activity extends AppCompatActivity {
 //
                         Intent intent = new Intent(Merchant2Activity.this, MerchantDetail.class);
                         intent.putExtra("namaStore", namaMerchant);
+                        intent.putExtra("addressStore", addressMerchant);
 //                        intent.putExtra("tech_code", tecCode);
 //                        intent.putExtra("start_time", startTime);
 //                        intent.putExtra("finish_time", finishTime);

@@ -115,7 +115,6 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.VersionViewH
             namaStore = (TextView) itemView.findViewById(R.id.name_merchant);
             alamatStore = (TextView) itemView.findViewById(R.id.address_merchant);
             rateStore = (TextView) itemView.findViewById(R.id.startext_merchant);
-            kmNearStore = (TextView) itemView.findViewById(R.id.locationtext_merchant);
             diskonStore = (TextView) itemView.findViewById(R.id.discount_mercant);
             imgStore = (ImageView) itemView.findViewById(R.id.photo_merchant);
 

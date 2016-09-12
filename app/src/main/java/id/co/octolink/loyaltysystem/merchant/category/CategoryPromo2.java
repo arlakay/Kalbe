@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.support.v7.widget.Toolbar;
 
 import id.co.octolink.R;
 import id.co.octolink.loyaltysystem.merchant.list.Merchant2Activity;
@@ -20,6 +21,7 @@ public class CategoryPromo2 extends AppCompatActivity {
     SessionManager sessionManager;
     Boolean isInternetPresent = false;
     CekNet cd;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +33,13 @@ public class CategoryPromo2 extends AppCompatActivity {
         ImageButton leisure = (ImageButton) findViewById(R.id.btn_leisure);
         ImageButton sports = (ImageButton) findViewById(R.id.btn_sports);
 
+
+        //TOOLBAR BACK BUTTON
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
         // Session manager
         sessionManager = new SessionManager(getApplicationContext());
 

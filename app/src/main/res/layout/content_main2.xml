@@ -53,7 +53,7 @@
 
                     <ImageButton
                         android:id="@+id/promo"
-                        android:background="@drawable/merchant_icon"
+                        android:background="@drawable/merchant"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center">
@@ -81,7 +81,7 @@
                         android:id="@+id/sale"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:background="@drawable/purchase_icon"
+                        android:background="@drawable/purchase"
                         android:layout_alignParentTop="true"/>
 
                     <TextView
@@ -112,7 +112,7 @@
 
                     <ImageButton
                         android:id="@+id/redeem"
-                        android:background="@drawable/redeem_icon"
+                        android:background="@drawable/scan_struk"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center">
@@ -123,7 +123,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="REDEEM"
+                        android:text="SCAN RECEIPT"
                         android:textColor="@android:color/black"
                         android:layout_marginTop="10dp"
                         android:layout_below="@+id/scanner"/>
@@ -140,7 +140,7 @@
                         android:id="@+id/history"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:background="@drawable/history_icon"
+                        android:background="@drawable/history"
                         android:layout_alignParentTop="true"/>
 
                     <TextView
