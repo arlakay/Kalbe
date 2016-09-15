@@ -1,7 +1,6 @@
 package id.co.octolink.loyaltysystem.merchant.list;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +9,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.google.gson.Gson;
 
@@ -18,9 +19,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.co.octolink.R;
-import id.co.octolink.loyaltysystem.merchant.detail.MerchantDetail;
 import id.co.octolink.api.RestApi;
 import id.co.octolink.api.services.ApiService;
+import id.co.octolink.loyaltysystem.merchant.detail.MerchantDetail;
 import id.co.octolink.model.Merchant;
 import id.co.octolink.model.MerchantResponse;
 import retrofit2.Call;
@@ -36,6 +37,7 @@ public class Merchant2Activity extends AppCompatActivity {
 
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.merchant_recyclerview) RecyclerView merchant_recyclerView;
+    @BindView(R.id.loading_merchant)ProgressBar loadingM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,6 @@ public class Merchant2Activity extends AppCompatActivity {
         merchant_recyclerView.setHasFixedSize(true);
 
         getStoreByCategory(idCategoryPromo2);
-
     }
 
     private void setupToolbar() {
@@ -69,7 +70,7 @@ public class Merchant2Activity extends AppCompatActivity {
     }
 
     private void getStoreByCategory(int category) {
-        final ProgressDialog dialog = ProgressDialog.show(Merchant2Activity.this, "", "loading...");
+        loadingM.setVisibility(View.VISIBLE);
 
         Log.e(TAG, String.valueOf(category));
         if(category == 0){
@@ -96,9 +97,9 @@ public class Merchant2Activity extends AppCompatActivity {
         call.enqueue(new Callback<MerchantResponse>() {
             @Override
             public void onResponse(Call<MerchantResponse>call, Response<MerchantResponse> response) {
-                dialog.dismiss();
+                loadingM.setVisibility(View.GONE);
 
-                merchantList = response.body().getMerchant();
+                merchantList = response.body().getStore();
 
                 Log.d(TAG, "Status Code = " + response.code());
                 Log.d(TAG, "Data received: " + new Gson().toJson(response.body()));
@@ -106,30 +107,18 @@ public class Merchant2Activity extends AppCompatActivity {
                 adapter2 = new StoreAdapter(merchantList, R.layout.mercant_card, getApplicationContext(), new StoreAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(Merchant model) {
-//                        int jobId = model.getJob_id();
-                        String namaMerchant =  model.getMerchant_name();
-                        String addressMerchant =  model.getCity();
-//                        String startTime = model.getStart_time();
-//                        String finishTime = model.getFinish_time();
-//                        String terminalCode = model.getTerminal_code();
-//                        String func = model.getFunction_code();
-//                        String symp = model.getSymptom_code();
-//
-//                        List<String> test = model.getSpareparts();
-//                        Log.e("Var Woi : ", test.toString());
-//                        String spare_code = test.toString();
-//
+                        String namaStore =  model.getStore_name();
+                        String addrStore =  model.getStreet();
+                        String discStore = model.getDiscount();
+                        String lati = model.getLatitude();
+                        String lngi = model.getLongitude();
+
                         Intent intent = new Intent(Merchant2Activity.this, MerchantDetail.class);
-                        intent.putExtra("namaStore", namaMerchant);
-                        intent.putExtra("addressStore", addressMerchant);
-//                        intent.putExtra("tech_code", tecCode);
-//                        intent.putExtra("start_time", startTime);
-//                        intent.putExtra("finish_time", finishTime);
-//                        intent.putExtra("term_code", terminalCode);
-//                        intent.putExtra("func_code", func);
-//                        intent.putExtra("symp_code", symp);
-//                        intent.putExtra("spare_code", spare_code);
-//
+                        intent.putExtra("namaStore", namaStore);
+                        intent.putExtra("addrStore", addrStore);
+                        intent.putExtra("discStore", discStore);
+                        intent.putExtra("lattitude", lati);
+                        intent.putExtra("longitude", lngi);
                         startActivity(intent);
                     }
                 });
@@ -138,7 +127,7 @@ public class Merchant2Activity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<MerchantResponse>call, Throwable t) {
-                dialog.dismiss();
+                loadingM.setVisibility(View.GONE);
 
                 Log.e(TAG, t.toString());
 

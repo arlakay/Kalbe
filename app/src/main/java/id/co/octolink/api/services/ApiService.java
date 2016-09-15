@@ -1,6 +1,7 @@
 package id.co.octolink.api.services;
 
 
+import id.co.octolink.model.HistoryResponse;
 import id.co.octolink.model.MerchantResponse;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -14,8 +15,14 @@ public interface ApiService {
 
     //Login - Test Success
     @FormUrlEncoded
-    @POST("users/merchant")
+    @POST("transaction/store")
     Call<MerchantResponse> getMerchantByCategory(@Field("category") String category);
+
+    //History - Test Success
+    @FormUrlEncoded
+    @POST("users/history")
+    Call<HistoryResponse> getHistoryByCustId(@Field("cid") String customerId);
+
 
 
 }

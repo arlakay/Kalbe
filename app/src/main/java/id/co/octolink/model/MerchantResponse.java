@@ -8,18 +8,19 @@ import java.util.List;
  * Created by ILM on 8/29/2016.
  */
 public class MerchantResponse {
-    @SerializedName("merchant")
-    private List<Merchant> merchant;
+    @SerializedName("store")
+    private List<Merchant> store;
 
-    public MerchantResponse(List<Merchant> merchant) {
-        this.merchant = merchant;
+    public MerchantResponse(List<Merchant> store) {
+        this.store = store;
     }
 
-    public List<Merchant> getMerchant() {
-        return merchant;
+    public List<Merchant> getStore() {
+        return store;
     }
 
-    public void setMerchant(List<Merchant> merchant) {
-        this.merchant = merchant;
+    public void setStore(List<Merchant> store) {
+        this.store = store;
     }
+
 }

@@ -16,10 +16,16 @@ public class Merchant {
     public String country;
     public String phone;
     public String discount;
+    public String idstore;
+    public String store_id;
+    public String store_name;
+    public String latitude;
+    public String longitude;
 
     public Merchant(String idmerchant, String merchant_id, String email, String merchant_name,
                     String company, String website, String category, String street, String city,
-                    String country, String phone, String discount) {
+                    String country, String phone, String discount, String idstore, String store_id,
+                    String store_name, String latitude, String longitude) {
         this.idmerchant = idmerchant;
         this.merchant_id = merchant_id;
         this.email = email;
@@ -32,6 +38,11 @@ public class Merchant {
         this.country = country;
         this.phone = phone;
         this.discount = discount;
+        this.idstore = idstore;
+        this.store_id = store_id;
+        this.store_name = store_name;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public String getIdmerchant() {
@@ -128,5 +139,45 @@ public class Merchant {
 
     public void setDiscount(String discount) {
         this.discount = discount;
+    }
+
+    public String getIdstore() {
+        return idstore;
+    }
+
+    public void setIdstore(String idstore) {
+        this.idstore = idstore;
+    }
+
+    public String getStore_id() {
+        return store_id;
+    }
+
+    public void setStore_id(String store_id) {
+        this.store_id = store_id;
+    }
+
+    public String getStore_name() {
+        return store_name;
+    }
+
+    public void setStore_name(String store_name) {
+        this.store_name = store_name;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 }

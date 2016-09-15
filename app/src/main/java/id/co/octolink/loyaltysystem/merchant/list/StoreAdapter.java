@@ -121,11 +121,11 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.VersionViewH
         }
 
         public void bind(final Merchant model, final OnItemClickListener listener) {
-            namaStore.setText( model.getMerchant_name());
-//            alamatStore.setText( model.getTerminal_code());
+            namaStore.setText( model.getStore_name());
+            alamatStore.setText( model.getStreet());
 //            rateStore.setText( model.getTerminal_code());
 //            kmNearStore.setText( model.getTerminal_code());
-//            diskonStore.setText( model.getTerminal_code());
+            diskonStore.setText( model.getDiscount()+"%");
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

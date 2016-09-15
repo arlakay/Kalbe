@@ -1,73 +1,64 @@
 package id.co.octolink.loyaltysystem.history.list;
 
 import android.content.DialogInterface;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.co.octolink.R;
-import id.co.octolink.model.History2;
-import id.co.octolink.singleton.AppController;
-import id.co.octolink.utils.Constants;
+import id.co.octolink.api.RestApi;
+import id.co.octolink.api.services.ApiService;
+import id.co.octolink.loyaltysystem.history.detail.StrukDetailHistory;
+import id.co.octolink.model.History;
+import id.co.octolink.model.HistoryResponse;
 import id.co.octolink.utils.SessionManager;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class History2Activity extends AppCompatActivity {
-    private static final String url =  Constants.BASE_URL + "/users/history";
+    private static final String TAG = History2Activity.class.getSimpleName();
     @BindView(R.id.toolbar)Toolbar toolbar;
     @BindView(R.id.history2_recyclerview)RecyclerView history2_recyclerview;
-    ArrayList<HashMap<String, String>> arraylist;
+    @BindView(R.id.loading_history)ProgressBar loadingH;
     private History2Adapter adapter;
-    private SwipeRefreshLayout swipeContainerHistory;
-    SessionManager session;
-    String d_version = "0.0.0.1";
-    String currentDate,yearNow,monthNow,year,month;
-    private List<History2> eventList = new ArrayList<History2>();
+    private SessionManager session;
+    private String cid, currentDate, yearNow, monthNow, year, month;
+    private List<History> historyList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history2);
         ButterKnife.bind(this);
 
+        session = new SessionManager(getApplicationContext());
+        HashMap<String, String> user = session.getUserDetails();
+        cid = user.get(SessionManager.KEY_CID);
+
         setupToolbar();
-        getHistoryFromCloud();
 
-        //List<History2> history2 = fill_with_history();
-        adapter = new History2Adapter(eventList, this);
-        history2_recyclerview.setAdapter(adapter);
-        history2_recyclerview.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplication().getBaseContext());
+        history2_recyclerview.setLayoutManager(linearLayoutManager);
+        history2_recyclerview.setHasFixedSize(true);
 
+        getHistoryByCustomerId(cid);
     }
 
     private void setupToolbar() {
-        setSupportActionBar(toolbar);
-        //TOOLBAR BACK BUTTON
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -85,134 +76,65 @@ public class History2Activity extends AppCompatActivity {
 //        finish();
         onBackPressed();
         return true;
-
-    }
-    public List<History2> fill_with_history() {
-
-        List<History2> history2 = new ArrayList<>();
-
-        history2.add(new History2("name", "address", "halooo"));
-        history2.add(new History2("name", "address", "halooo"));
-        history2.add(new History2("name", "address", "halooo"));
-        history2.add(new History2("name", "address", "halooo"));
-        history2.add(new History2("name", "address", "halooo"));
-        history2.add(new History2("name", "address", "halooo"));
-        history2.add(new History2("name", "address", "halooo"));
-
-
-        return history2;
     }
 
-    private void getHistoryFromCloud(){
-        session = new SessionManager(getApplicationContext());
-        HashMap<String, String> user = session.getUserDetails();
-        final String cid = user.get(SessionManager.KEY_CID);
+    private void getHistoryByCustomerId(String custId) {
+        loadingH.setVisibility(View.VISIBLE);
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
-        Date date = new Date();
-        currentDate = dateFormat.format(date);
+        ApiService apiService =
+                RestApi.getClient().create(ApiService.class);
 
-        //Log.e("CURRENT_DATE",currentDate);
-
-        StringRequest movieReq = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        Call<HistoryResponse> call = apiService.getHistoryByCustId(custId);
+        call.enqueue(new Callback<HistoryResponse>() {
             @Override
-            public void onResponse(String response) {
-                //Log.d("History Bro : ", response.toString());
-                arraylist = new ArrayList<HashMap<String, String>>();
-                //hidePDialog();
-                try {
-                    //Thread.sleep(2000);
-                    JSONObject job = new JSONObject(response);
-                    JSONArray data = job.getJSONArray("history");
-                    for (int i = 0; i < data.length(); i++) {
-                        JSONObject obj = data.getJSONObject(i);
-                        History2 event = new History2();
-//                        event.setTitle(obj.getString("merchant_id"));
-//                        event.setDesc(obj.getString("transaction_date"));
-                        event.setDatemerchant_history2(obj.getString("total_amount"));
-                        event.setAddressmerchant_history2(obj.getString("merchant_name"));
-                        event.setNamemerchant_history2(obj.getString("store_name"));
-//                        event.setDiskon(obj.getString("discount"));
+            public void onResponse(Call<HistoryResponse>call, retrofit2.Response<HistoryResponse> response) {
+                loadingH.setVisibility(View.GONE);
 
-                        String date = event.getDatemerchant_history2();
-                        String dateFromAPI = "";
-                        for (int j = 0; j <7 ; j++) {
-                            //dateFromAPI += date.charAt(j);
-                        }
+                historyList = response.body().getHistories();
 
-                        if (validationYearAndMonth(currentDate,dateFromAPI)){
-                            eventList.add(event);
-                        }
+                Log.d(TAG, "Status Code = " + response.code());
+                Log.d(TAG, "Data received: " + new Gson().toJson(response.body()));
 
-                        HashMap<String, String> map = new HashMap<String, String>();
-                        obj = data.getJSONObject(i);
-                        // Retrive JSON Objects
-                        map.put("name", obj.getString("merchant_name"));
-                        map.put("rank", obj.getString("merchant_id"));
-                        map.put("country", obj.getString("transaction_date"));
-                        map.put("population", obj.getString("total_amount"));
-                        arraylist.add(map);
+                adapter = new History2Adapter(historyList, R.layout.history2_card, getApplicationContext(), new History2Adapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(History model) {
+                        String namaMerchant =  model.getStore_name();
+                        String transactDate =  model.getTransaction_date();
+
+                        Intent intent = new Intent(History2Activity.this, StrukDetailHistory.class);
+                        intent.putExtra("namaStore", namaMerchant);
+                        intent.putExtra("dateTransact", transactDate);
+                        startActivity(intent);
                     }
-
-                    history2_recyclerview.setAdapter(adapter);
-//                    swipeContainerHistory.setRefreshing(false);
-                }
-
-                catch (JSONException e) {
-                    e.printStackTrace();
-                }/*catch (InterruptedException e) {
-                    e.printStackTrace();
-                }*/
-                //hidePDialog();
-                adapter.notifyDataSetChanged();
-                //hidePDialog();
-
+                });
+                history2_recyclerview.setAdapter(adapter);
             }
 
-        }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                //VolleyLog.d(TAG, "Error: " + error.getMessage());
-                //hidePDialog();
-                swipeContainerHistory.setRefreshing(false);
+            public void onFailure(Call<HistoryResponse>call, Throwable t) {
+                loadingH.setVisibility(View.GONE);
 
-//                alertDialogBuilder.setMessage("Error in Collecting Data \n" +
-//                        "Swipe Down to Refresh");
-//                alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        //comment
-//                    }
-//                });
-//                AlertDialog alertDialog = alertDialogBuilder.create();
-//                alertDialog.show();
+                Log.e(TAG, t.toString());
 
+                android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(History2Activity.this).create();
+                alertDialog.setTitle("Error");
+                alertDialog.setMessage("Kesalahan Jaringan");
+                alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        finish();
+                        startActivity(getIntent());
+                    }
+                });
+                alertDialog.show();
             }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                // Posting parameters to login url
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("cid", cid);
-                //Log.d("cidkey", "cidkey" + cid);
-                return params;
-            }
-        };
-
-        movieReq.setRetryPolicy(new DefaultRetryPolicy(
-                (int) TimeUnit.SECONDS.toMillis(20),
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        AppController.getInstance().addToRequestQueue(movieReq);
-        History2Adapter adapter = new History2Adapter(eventList, History2Activity.this);
-        history2_recyclerview.setAdapter(adapter);
+        });
     }
 
     private boolean validationYearAndMonth (String currentMonthAndYear, String MonthAndYear){
-
         if (currentMonthAndYear.equals(MonthAndYear)){return true;}else {return false;}
     }
+
 }
 
 

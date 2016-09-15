@@ -1,47 +1,20 @@
 package id.co.octolink.loyaltysystem.struk;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import id.co.octolink.R;
 import android.app.Activity;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.IntentFilter;
-
-import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
-import android.hardware.Camera.ShutterCallback;
-
-import android.os.BatteryManager;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import java.util.ArrayList;
-import java.util.Set;
+import id.co.octolink.R;
 
 public class StrukActivity extends Activity implements SurfaceHolder.Callback{
 
@@ -164,4 +137,5 @@ public class StrukActivity extends Activity implements SurfaceHolder.Callback{
         camera.release();
         camera = null;
     }
+
 }

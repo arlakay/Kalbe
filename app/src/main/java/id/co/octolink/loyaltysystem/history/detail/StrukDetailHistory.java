@@ -30,7 +30,6 @@ public class StrukDetailHistory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_struk_detail_history);
 
-        // declaration
         buttonDoneDetailHistory = (Button)findViewById(R.id.buttonDoneDetailHistory);
         textViewStoreName = (TextView)findViewById(R.id.textViewStoreName);
         textMerchantName = (TextView) findViewById(R.id.textMerchantName);
@@ -38,21 +37,15 @@ public class StrukDetailHistory extends AppCompatActivity {
         textViewDateDetailHistory = (TextView)findViewById(R.id.textViewDateDetailHistory);
         txtDiskon = (TextView)findViewById(R.id.textViewDiscountDetailHistory);
 
-        // get from intent
         Intent i = getIntent();
-        storeName = i.getStringExtra("storeName");
-        date = i.getStringExtra("date");
+        storeName = i.getStringExtra("namaStore");
+        date = i.getStringExtra("dateTransact");
         merchantName = i.getStringExtra("merchantName");
         diskon = i.getStringExtra("diskon");
 
-        //Log.d(TAG, "diskon"+diskon);
-
-        // session
         sessionManager = new SessionManager(getApplicationContext());
         HashMap<String, String> user = sessionManager.getUserDetails();
         customerID = user.get(SessionManager.KEY_CID);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         textMerchantName.setText(merchantName);
         textViewStoreName.setText(storeName);
@@ -67,18 +60,12 @@ public class StrukDetailHistory extends AppCompatActivity {
             }
         });
 
-
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == android.R.id.home) {
             finish();
         }
